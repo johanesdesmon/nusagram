@@ -3,7 +3,6 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-# Ganti URL MongoDB Anda
 mongo_uri = 'mongodb+srv://nusyoman:manis@cluster0.wjeaswn.mongodb.net/?retryWrites=true&w=majority'
 client = MongoClient(mongo_uri)
 db = client['dbsparta_plus_week4']
@@ -12,23 +11,29 @@ db = client['dbsparta_plus_week4']
 def index():
     return render_template('index.html')
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    name = request.form.get('name')
-    email = request.form.get('email')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        name = request.form.get('username')  # Mengganti 'name' menjadi 'username'
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
 
-    user_data = {'name': name, 'email': email, 'password': password}
-    db.users.insert_one(user_data)
+        if password != confirm_password:
+            return "Password tidak sesuai dengan konfirmasi password"
 
-    return redirect(url_for('index'))
+        user_data = {'name': name, 'password': password}  # Menghapus 'email' dari data pengguna
+        db.users.insert_one(user_data)
+
+        return redirect(url_for('index'))
+
+    return render_template('register.html')
 
 @app.route('/login', methods=['POST'])
 def login():
-    email = request.form.get('email')
+    username = request.form.get('username')
     password = request.form.get('password')
 
-    user = db.users.find_one({'email': email, 'password': password})
+    user = db.users.find_one({'name': username, 'password': password})
 
     if user:
         return "Login berhasil!"
