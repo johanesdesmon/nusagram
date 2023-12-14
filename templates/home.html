@@ -2,20 +2,424 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <title>Home</title>
-    <style>
-        
-    </style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram</title>
+  <link rel="stylesheet" href="../static/home.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-    
+  <nav class="nav">
+    <div class="nav_bar">
+      <a href="./home.html" class="logo">
+        <img src="../static/icons/logo_min.png" alt="Instsgram Logo" />
+      </a>
+
+      <form action="./home.html" method="post" class="search_bar">
+        <input type="text" name="search" id="search" placeholder="Search" />
+      </form>
+      <div class="nav_items">
+        <a href="" class="nav_icons home">
+          <img src="../static/svg/home.svg" alt="Home" />
+        </a>
+        <a href="" class="nav_icons inbox">
+          <img src="../static/svg/message.svg" alt="Inbox" />
+        </a>
+        <a href="#add_post" class="nav_icons post" style="border: none">
+          <img src="../static/svg/make_post.svg" alt="post" />
+        </a>
+        <a href="" class="nav_icons explore">
+          <img src="../static/svg/explore.svg" alt="explore" />
+        </a>
+        <a href="" class="nav_icons heart">
+          <img src="../static/svg/heart.svg" alt="heart" />
+        </a>
+
+        <div class="nav_icons profile">
+          <img src="../static/images/profile_pic.jpg" alt="Profile Pic" />
+
+          <div class="actions">
+            <a href="#" class="action">
+              <img class="actionIcon profileAction" src="../static/svg/profile.svg" alt="profile" />
+              <p class="action_title">Profile</p>
+            </a>
+            <a href="#" class="action">
+              <img class="actionIcon saveAction" src="../static/svg/saved.svg" alt="saved" />
+              <p class="action_title">Saved</p>
+            </a>
+            <a href="#" class="action">
+              <img class="actionIcon settingAction" src="../static/svg/setting.svg" alt="profile" />
+              <p class="action_title">Setting</p>
+            </a>
+            <a href="#" class="action">
+              <img class="actionIcon switchAction" src="../static/svg/switch.svg" alt="profile" />
+              <p class="action_title">Switch Accounts</p>
+            </a>
+            <a href="../index.html" class="action">
+              <p class="action_title">Log Out</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Add New Post POPUP -->
+  <div id="add_post" class="box">
+    <a class="close" href="#">&times;</a>
+    <div class="innerBox">
+      <p class="title">Create new post</p>
+      <div class="select_area">
+        <div class="innerBox2">
+          <img src="../static/svg/multimedia.svg" alt="multimedia" />
+          <p class="innerText">Upload photos and videos here</p>
+
+          <label class="select_file">
+            <input type="file" />
+            Select from computer
+          </label>
+
+          <!-- <input type="file" name="selectFile" id="file" /> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+
+  <div class="container">
+    <div class="left-side">
+      <!-- Status -->
+      <div class="status">
+        <div class="status_card">
+          <div class="profile_pic pending">
+            <img src="../static/images/pic_1.png" alt="pic_1" />
+          </div>
+          <p class="status_username">Brucebanner</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic pending">
+            <img src="../static/images/pic_2.jpg" alt="pic_2" />
+          </div>
+          <p class="status_username">Skullcrusher</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic pending">
+            <img src="../static/images/pic_3.jpg" alt="pic_3" />
+          </div>
+          <p class="status_username">Lovecapri</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic pending">
+            <img src="../static/images/pic_4.jpg" alt="pic_4" />
+          </div>
+          <p class="status_username">Gamez_Slayer</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic seen">
+            <img src="../static/images/pic_5.jpg" alt="pic_5" />
+          </div>
+          <p class="status_username">Girlyapa</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic seen">
+            <img src="../static/images/pic_6.jpg" alt="pic_6" />
+          </div>
+          <p class="status_username">Dead_Ultra</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic seen">
+            <img src="../static/images/pic_7.jpg" alt="pic_7" />
+          </div>
+          <p class="status_username">big_bites</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic seen">
+            <img src="../static/images/pic_8.jpg" alt="pic_8" />
+          </div>
+          <p class="status_username">classy_girl</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic seen">
+            <img src="../static/images/pic_9.jpg" alt="pic_9" />
+          </div>
+          <p class="status_username">famous_guy</p>
+        </div>
+        <div class="status_card">
+          <div class="profile_pic seen">
+            <img src="../static/images/pic_10.jpg" alt="pic_10" />
+          </div>
+          <p class="status_username">professer_x</p>
+        </div>
+      </div>
+
+      <!-- POST 1 -->
+      <div class="post">
+        <div class="post_user_detail">
+          <div class="user_detail">
+            <div class="profile_pic pending">
+              <img src="../static/images/pic_10.jpg" alt="pic_10" />
+            </div>
+            <p class="status_username">professer_x</p>
+          </div>
+          <a href="#" class="menuIcon">
+            <img src="../static/svg/three_dots.svg" alt="menu" />
+          </a>
+        </div>
+
+        <div class="post_content">
+          <img src="../static/images/pic_10.jpg" alt="post1" />
+        </div>
+
+        <div class="post_description">
+          <!-- POST INTERACTIONS -->
+          <div class="post_interactions">
+            <div class="interactions">
+              <div class="interaction_icons likeIcon">
+                <img src="../static/svg/heart.svg" alt="Like" />
+              </div>
+              <div class="interaction_icons commentIcon">
+                <img src="../static/svg/comment.svg" alt="Comment" />
+              </div>
+              <div class="interaction_icons shareIcon">
+                <img src="../static/svg/share.svg" alt="Share" />
+              </div>
+            </div>
+            <div class="interaction_icons saveIcon">
+              <img src="../static/svg/saved.svg" alt="save" />
+            </div>
+          </div>
+        </div>
+
+        <!-- POST DESCRIPTION -->
+        <div class="description">
+          <p class="likes">12,223 likes</p>
+          <div class="des">
+            <p class="status_username">professer_x</p>
+            <p class="desText">
+              Be thankful for what you have. What’s your thought?
+            </p>
+          </div>
+          <a href="#" class="view_all_comments">View all 27 comments</a>
+          <div class="time">2 DAYS AGO</div>
+        </div>
+      </div>
+
+      <!-- POST 2 -->
+      <div class="post">
+        <div class="post_user_detail">
+          <div class="user_detail">
+            <div class="profile_pic pending">
+              <img src="../static/images/pic_4.jpg" alt="pic_4" />
+            </div>
+            <p class="status_username">Girlyapa</p>
+          </div>
+          <a href="#" class="menuIcon">
+            <img src="../static/svg/three_dots.svg" alt="menu" />
+          </a>
+        </div>
+
+        <div class="post_content">
+          <img src="../static/images/post2.jpg" alt="post2" />
+        </div>
+
+        <div class="post_description">
+          <!-- POST INTERACTIONS -->
+          <div class="post_interactions">
+            <div class="interactions">
+              <div class="interaction_icons likeIcon">
+                <img src="../static/svg/heart.svg" alt="Like" />
+              </div>
+              <div class="interaction_icons commentIcon">
+                <img src="../static/svg/comment.svg" alt="Comment" />
+              </div>
+              <div class="interaction_icons shareIcon">
+                <img src="../static/svg/share.svg" alt="Share" />
+              </div>
+            </div>
+            <div class="interaction_icons saveIcon">
+              <img src="../static/svg/saved.svg" alt="save" />
+            </div>
+          </div>
+        </div>
+
+        <!-- POST DESCRIPTION -->
+        <div class="description">
+          <p class="likes">1,12,223 likes</p>
+          <div class="des">
+            <p class="status_username">Girlyapa</p>
+            <p class="desText">
+              Breathtaking Swiss views!🇨🇭🤩
+              <br />
+              Tag a friend you’d like to take here! 🎥 @swiss.beautiful_
+              <br />
+              📍Unterbach, Switzerland #nature
+            </p>
+          </div>
+          <a href="#" class="view_all_comments">View all 1201 comments</a>
+          <div class="time">15 HOURS AGO</div>
+        </div>
+      </div>
+
+      <!-- POST 3 -->
+      <div class="post">
+        <div class="post_user_detail">
+          <div class="user_detail">
+            <div class="profile_pic pending">
+              <img src="../static/images/pic_2.jpg" alt="pic_2" />
+            </div>
+            <p class="status_username">Skullcrusher</p>
+          </div>
+          <a href="#" class="menuIcon">
+            <img src="../static/svg/three_dots.svg" alt="menu" />
+          </a>
+        </div>
+
+        <div class="post_content">
+          <img src="../static/images/post3.jpg" alt="post3" />
+        </div>
+
+        <div class="post_description">
+          <!-- POST INTERACTIONS -->
+          <div class="post_interactions">
+            <div class="interactions">
+              <div class="interaction_icons likeIcon">
+                <img src="../static/svg/heart.svg" alt="Like" />
+              </div>
+              <div class="interaction_icons commentIcon">
+                <img src="../static/svg/comment.svg" alt="Comment" />
+              </div>
+              <div class="interaction_icons shareIcon">
+                <img src="../static/svg/share.svg" alt="Share" />
+              </div>
+            </div>
+            <div class="interaction_icons saveIcon">
+              <img src="../static/svg/saved.svg" alt="save" />
+            </div>
+          </div>
+        </div>
+
+        <!-- POST DESCRIPTION -->
+        <div class="description">
+          <p class="likes">120 likes</p>
+          <div class="des">
+            <p class="status_username">Skullcrusher</p>
+            <p class="desText">
+              Good morning from Norway!🏡 Have you ever been to Norway?😍
+              <br />
+              📍Stryn, Norway
+            </p>
+          </div>
+          <a href="#" class="view_all_comments">View all 12 comments</a>
+          <div class="time">21 HOURS AGO</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right-side">
+      <div class="myDetails">
+        <div class="profile_details">
+          <div class="profile_pic">
+            <img src="../static/images/profile_pic.jpg" alt="profile_pic" />
+          </div>
+          <div class="more_details">
+            <p class="username">p._.manish</p>
+            <p class="name">Manish Prajapati</p>
+          </div>
+        </div>
+        <div class="switch_link">
+          <a href="#">Switch</a>
+        </div>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="suggestion_part">
+        <p class="suggestion_text">Suggestions For You</p>
+        <a href="#" class="see_all">See All</a>
+      </div>
+
+      <div class="other_people">
+        <div class="profile_details">
+          <div class="profile_pic_suggested">
+            <img src="../static/images/pic_2.jpg" alt="pic_2" />
+          </div>
+          <div class="more_details">
+            <p class="username">skullcrusher</p>
+            <p class="name">Follows You</p>
+          </div>
+        </div>
+        <div class="switch_link">
+          <a href="#">Follow</a>
+        </div>
+      </div>
+
+      <div class="other_people">
+        <div class="profile_details">
+          <div class="profile_pic_suggested">
+            <img src="../static/images/pic_10.jpg" alt="pic_10" />
+          </div>
+          <div class="more_details">
+            <p class="username">professer_x</p>
+            <p class="name">New to Instagram</p>
+          </div>
+        </div>
+        <div class="switch_link">
+          <a href="#">Follow</a>
+        </div>
+      </div>
+
+      <div class="other_people">
+        <div class="profile_details">
+          <div class="profile_pic_suggested">
+            <img src="../static/images/pic_6.jpg" alt="pic_6" />
+          </div>
+          <div class="more_details">
+            <p class="username">dead_ultra</p>
+            <p class="name">New to Instagram</p>
+          </div>
+        </div>
+        <div class="switch_link">
+          <a href="#">Follow</a>
+        </div>
+      </div>
+
+      <div class="other_people">
+        <div class="profile_details">
+          <div class="profile_pic_suggested">
+            <img src="../static/images/pic_3.jpg" alt="pic_3" />
+          </div>
+          <div class="more_details">
+            <p class="username">lovecapri</p>
+            <p class="name">Followed by big_bites + 2 more</p>
+          </div>
+        </div>
+        <div class="switch_link">
+          <a href="#">Follow</a>
+        </div>
+      </div>
+
+      <div class="other_people">
+        <div class="profile_details">
+          <div class="profile_pic_suggested">
+            <img src="../static/images/pic_7.jpg" alt="profile_pic" />
+          </div>
+          <div class="more_details">
+            <p class="username">big_bites</p>
+            <p class="name">New to Instagram</p>
+          </div>
+        </div>
+        <div class="switch_link">
+          <a href="#">Follow</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
