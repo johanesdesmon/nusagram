@@ -1,3 +1,5 @@
+import os
+from os.path import join, dirname
 from pymongo import MongoClient
 import jwt
 import datetime
@@ -5,22 +7,19 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
-import certifi
 
-ca = certifi.where()
+app = Flask(__name__)
 
+# Ganti URL MongoDB Anda
+mongo_uri = 'mongodb://lxfarhan:test@ac-xafbpj1-shard-00-00.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-01.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-02.q0qvbkc.mongodb.net:27017/?ssl=true&replicaSet=atlas-erdgvk-shard-0&authSource=admin&retryWrites=true&w=majority'
+client = MongoClient(mongo_uri)
+db = client['dbsparta_plus_week5']
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["UPLOAD_FOLDER"] = "./static/profile_pics"
 
-SECRET_KEY = "MINIGRAM"
-
-MONGODB_CONNECTION_STRING = (
-    "mongodb://lxfarhan:test@ac-xafbpj1-shard-00-00.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-01.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-02.q0qvbkc.mongodb.net:27017/?ssl=true&replicaSet=atlas-erdgvk-shard-0&authSource=admin&retryWrites=true&w=majority"
-)
-client = MongoClient(MONGODB_CONNECTION_STRING, tlsCAFile=ca)
-db = client.sweeter
+SECRET_KEY = "SPARTA"
 
 
 @app.route("/")
@@ -30,12 +29,10 @@ def home():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=["HS256"])
         user_info = db.users.find_one({"username": payload["id"]})
         return render_template("index.html", user_info=user_info)
-        # return render_template("index.html")
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="Your token has expired"))
     except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="anda harus login dulu"))
-
+        return redirect(url_for("login", msg="There was problem logging you in"))
 
 
 @app.route("/login")
@@ -67,6 +64,7 @@ def sign_in():
     username_receive = request.form["username_give"]
     password_receive = request.form["password_give"]
     pw_hash = hashlib.sha256(password_receive.encode("utf-8")).hexdigest()
+    print(username_receive, pw_hash)
     result = db.users.find_one(
         {
             "username": username_receive,
@@ -79,7 +77,7 @@ def sign_in():
             # the token will be valid for 24 hours
             "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256").decode("utf-8")
+        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
         return jsonify(
             {
@@ -108,7 +106,7 @@ def sign_up():
         "password": password_hash,  # password
         "profile_name": username_receive,  # user's name is set to their id by default
         "profile_pic": "",  # profile image file name
-        "profile_pic_real": "profile_pics/profile_placeholder.png",  # a default profile image
+        "profile_pic_real": "profile_pics/profile_placeholder.jpeg",  # a default profile image
         "profile_info": "",  # a profile description
     }
     db.users.insert_one(doc)
@@ -117,6 +115,7 @@ def sign_up():
 
 @app.route("/sign_up/check_dup", methods=["POST"])
 def check_dup():
+    # ID we should check whether or not the id is already taken
     username_receive = request.form["username_give"]
     exists = bool(db.users.find_one({"username": username_receive}))
     return jsonify({"result": "success", "exists": exists})
@@ -127,8 +126,6 @@ def save_img():
     token_receive = request.cookies.get("mytoken")
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=["HS256"])
-        
-        # Kita update profil user disini
         username = payload["id"]
         name_receive = request.form["name_give"]
         about_receive = request.form["about_give"]
@@ -142,8 +139,7 @@ def save_img():
             new_doc["profile_pic"] = filename
             new_doc["profile_pic_real"] = file_path
         db.users.update_one({"username": payload["id"]}, {"$set": new_doc})
-
-        return jsonify({"result": "success", "msg": "Your profile has been updated"})
+        return jsonify({"result": "success", "msg": "Profile updated!"})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
@@ -189,28 +185,22 @@ def get_posts():
             post["count_heart"] = db.likes.count_documents(
                 {"post_id": post["_id"], "type": "heart"}
             )
-            
             post["count_star"] = db.likes.count_documents(
                 {"post_id": post["_id"], "type": "star"}
             )
-            
             post["count_thumbsup"] = db.likes.count_documents(
                 {"post_id": post["_id"], "type": "thumbsup"}
             )
-            
             post["heart_by_me"] = bool(
                 db.likes.find_one(
                     {"post_id": post["_id"], "type": "heart", "username": payload["id"]}
                 )
             )
-            
             post["star_by_me"] = bool(
                 db.likes.find_one(
                     {"post_id": post["_id"], "type": "star", "username": payload["id"]}
                 )
             )
-
-            
             post["thumbsup_by_me"] = bool(
                 db.likes.find_one(
                     {"post_id": post["_id"], "type": "thumbsup", "username": payload["id"]}
@@ -254,25 +244,21 @@ def update_like():
         return redirect(url_for("home"))
 
 
-@app.route("/about", methods=["GET"])
+@app.route("/about")
 def about():
     return render_template("about.html")
 
 
-@app.route("/secret", methods=["GET"])
+@app.route("/secret")
 def secret():
-    token_receive = request.cookies.get('mytoken')
+    token_receive = request.cookies.get("mytoken")
     try:
-        payload = jwt.decode(
-            token_receive,
-            SECRET_KEY,
-            algorithms=['HS256']
-        )
-        user_info = db.users.find_one({'username' : payload.get('id')})
-        msg = 'Anda Telah Login sebagai'
-        return render_template("secret.html", user_info=user_info, msg=msg)
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=["HS256"])
+        return render_template("secret.html")
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for('home'))
+        return redirect(url_for("home"))
+
+
 
 @app.route("/home", methods=['GET'])
 def inihome():
