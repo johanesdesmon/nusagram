@@ -17,8 +17,8 @@ app.config["UPLOAD_FOLDER"] = "./static/profile_pics"
 SECRET_KEY = "MINIGRAM"
 
 MONGODB_CONNECTION_STRING = (
-    # "mongodb://lxfarhan:test@ac-xafbpj1-shard-00-00.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-01.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-02.q0qvbkc.mongodb.net:27017/?ssl=true&replicaSet=atlas-erdgvk-shard-0&authSource=admin&retryWrites=true&w=majority"
-    "mongodb+srv://ncc1477:Qwedsa123!@cluster0.kkwb2cl.mongodb.net"
+    "mongodb://lxfarhan:test@ac-xafbpj1-shard-00-00.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-01.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-02.q0qvbkc.mongodb.net:27017/?ssl=true&replicaSet=atlas-erdgvk-shard-0&authSource=admin&retryWrites=true&w=majority"
+    # "mongodb+srv://ncc1477:Qwedsa123!@cluster0.kkwb2cl.mongodb.net"
 )
 client = MongoClient(MONGODB_CONNECTION_STRING, tlsCAFile=ca)
 db = client.minigram
