@@ -17,10 +17,11 @@ app.config["UPLOAD_FOLDER"] = "./static/profile_pics"
 SECRET_KEY = "MINIGRAM"
 
 MONGODB_CONNECTION_STRING = (
-    "mongodb://lxfarhan:test@ac-xafbpj1-shard-00-00.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-01.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-02.q0qvbkc.mongodb.net:27017/?ssl=true&replicaSet=atlas-erdgvk-shard-0&authSource=admin&retryWrites=true&w=majority"
+    # "mongodb://lxfarhan:test@ac-xafbpj1-shard-00-00.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-01.q0qvbkc.mongodb.net:27017,ac-xafbpj1-shard-00-02.q0qvbkc.mongodb.net:27017/?ssl=true&replicaSet=atlas-erdgvk-shard-0&authSource=admin&retryWrites=true&w=majority"
+    "mongodb+srv://ncc1477:Qwedsa123!@cluster0.kkwb2cl.mongodb.net"
 )
 client = MongoClient(MONGODB_CONNECTION_STRING, tlsCAFile=ca)
-db = client.sweeter
+db = client.minigram
 
 
 @app.route("/")
@@ -157,12 +158,21 @@ def posting():
         user_info = db.users.find_one({"username": payload["id"]})
         comment_receive = request.form["comment_give"]
         date_receive = request.form["date_give"]
+
+        today = datetime.now()
+        mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+        file = request.files['file_give']
+        extension = file.filename.split('.')[-1]
+        filename = f'static/feed/post-{mytime}.{extension}'
+        file.save(filename)
+
         doc = {
             "username": user_info["username"],
             "profile_name": user_info["profile_name"],
             "profile_pic_real": user_info["profile_pic_real"],
             "comment": comment_receive,
             "date": date_receive,
+            "foto":filename
         }
         db.posts.insert_one(doc)
         return jsonify({"result": "success", "msg": "Posting successful!"})

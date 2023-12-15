@@ -2,15 +2,23 @@
 function post() {
     let comment = $("#textarea-post").val()
     let today = new Date().toISOString()
+    let file = $("#image").prop("files")[0];
+    let form_data = new FormData();
+
+    form_data.append('file_give', file);
+    form_data.append('comment_give', comment);
+    form_data.append('date_give', today);
+
+    
     $.ajax({
         type: "POST",
         url: "/posting",
-        data: {
-            comment_give: comment,
-            date_give: today
-        },
+        data: form_data,
+        contentType : false,
+        processData : false,
         success: function (response) {
             $("#modal-post").removeClass("is-active")
+            alert(response['msg']);
             window.location.reload()
         }
     })
@@ -51,6 +59,9 @@ function get_posts(username) {
                                                       <p>
                                                           <strong>${post["profile_name"]}</strong> <small>@${post["username"]}</small> <small>${time_before}</small>
                                                           <br>
+                                                          <img class="is-rounded" src="../${post["foto"]}"
+                                                          alt="Image">
+                                                          
                                                           ${post["comment"]}
                                                       </p>
                                                   </div>
