@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home | SWEETER</title>
+  <title>Home | MiniGram</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -30,7 +30,7 @@
 
 </head>
 
-<body class="has-navbar-fixed-top">
+<body>
   <!-- <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -42,20 +42,21 @@
 
   <nav class="nav">
     <div class="nav_bar">
-      <a href="./home.html" class="logo">
+      <a href="#" class="logo">
         <img src="../static/logo_large.png" alt="Instsgram Logo" />
       </a>
+    </div>
 
-      <form action="./home.html" method="post" class="search_bar">
+      <!-- <form action="./home.html" method="post" class="search_bar">
         <input type="text" name="search" id="search" placeholder="Search" />
-      </form>
+      </form> -->
       <div class="nav_items">
-        <a href="" class="nav_icons home">
+        <a href="#" class="nav_icons home">
           <img src="../static/svg/home.svg" alt="Home" />
         </a>
-        <a href="" class="nav_icons inbox">
+        <!-- <a href="" class="nav_icons inbox">
           <img src="../static/svg/message.svg" alt="Inbox" />
-        </a>
+        </a> -->
         <a href="#add_post" class="nav_icons post" style="border: none" onclick='$("#modal-post").addClass("is-active")'>
           <img src="../static/svg/make_post.svg" alt="post" />
         </a>
@@ -63,34 +64,21 @@
         <div class="nav_icons profile">
           <!-- <img src="../static/images/profile_pic.jpg" alt="Profile Pic" /> -->
           <figure class="media-left" style="align-self: center">
-            <a class="image is-32x32" href="/user/{{ user_info.username }}">
+            <a class="image is-32x32">
               <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
             </a>
           </figure>
 
           <div class="actions">
-            <a href="#" class="action">
+            <a href="/user/{{ user_info.username }}" class="action">
               <img class="actionIcon profileAction" src="../static/svg/profile.svg" alt="profile" />
               <p class="action_title" >Profile</p>
             </a>
-            <a href="#" class="action">
-              <img class="actionIcon saveAction" src="../static/svg/saved.svg" alt="saved" />
-              <p class="action_title">Saved</p>
-            </a>
-            <a href="#" class="action">
-              <img class="actionIcon settingAction" src="../static/svg/setting.svg" alt="profile" />
-              <p class="action_title">Setting</p>
-            </a>
-            <a href="#" class="action">
-              <img class="actionIcon switchAction" src="../static/svg/switch.svg" alt="profile" />
-              <p class="action_title">Switch Accounts</p>
-            </a>
-            <a href="../index.html" class="action">
+            <a class="action" onclick="sign_out()">
               <p class="action_title">Log Out</p>
             </a>
           </div>
         </div>
-      </div>
     </div>
   </nav>
 
