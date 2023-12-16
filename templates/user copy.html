@@ -2,20 +2,20 @@
 <html lang="en">
 
 <head>
-  <title>Home | MiniGram</title>
-
+  <title>Home |MiniGram</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-
+  
   <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
   <meta property="og:title" content="Sweeter - the sweetest site" />
   <meta property="og:description" content="mini project for Web Plus" />
   <meta property="og:image" content="{{ url_for('static', filename='logo.png') }}" />
 
+  <!-- Bulma CSS -->
   <link rel="stylesheet" href="bulma@0.9.1/css/bulma.min.css">
   <link href=" 
       https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" rel="stylesheet" />
+  <!-- Font Awesome CSS -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
   <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet" />
@@ -25,72 +25,40 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
   <script src="{{ url_for('static', filename='myjs.js') }}"></script>
 
-
-  <!-- <link rel="stylesheet" href="../static/home.css" /> -->
-
 </head>
 
-<body>
-  <!-- <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+<body class="has-navbar-fixed-top">
+  <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         <img src="{{ url_for('static', filename='logo.png') }}" />
-        <strong class="is-sparta" style="font-family: 'Stylish', sans-serif; font-size: larger"> SWEETER </strong>
+        <strong class="is-sparta" style="font-family: 'Stylish', sans-serif; font-size: larger"> MiniGram </strong>
       </a>
     </div>
-  </nav> -->
+  </nav>
 
-  <nav class="nav">
-    <div class="nav_bar">
-      <a href="/" class="logo">
-        <img src="../static/logo_large.png" alt="Instsgram Logo" />
-      </a>
-    </div>
+  <section class="hero is-white">
+    <div class="hero-body" style="padding-bottom:1rem;margin:auto;min-width: 400px">
+      <article class="media">
 
-    <!-- <form action="./home.html" method="post" class="search_bar">
-        <input type="text" name="search" id="search" placeholder="Search" />
-      </form> -->
-    <div class="nav_items">
-      <a href="/user/{{ user_info.username }}" class="nav_icons home">
-        <img src="../static/svg/home.svg" alt="Home" />
-      </a>
-      <!-- <a href="" class="nav_icons inbox">
-          <img src="../static/svg/message.svg" alt="Inbox" />
-        </a> -->
-      <a href="#add_post" class="nav_icons post" style="border: none" onclick='$("#modal-post").addClass("is-active")'>
-        <img src="../static/svg/make_post.svg" alt="post" />
-      </a>
-
-      <div class="nav_icons profile">
-        <!-- <img src="../static/images/profile_pic.jpg" alt="Profile Pic" /> -->
         <figure class="media-left" style="align-self: center">
-          <a class="image is-32x32">
+          <a class="image is-96x96" href="#">
             <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
           </a>
         </figure>
-        <strong>{{ user_info.username }}</strong>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>{{ user_info.profile_name }}</strong> <small>@{{ user_info.username }}</small>
+              <br>
+              {{ user_info.profile_info }}
+            </p>
+          </div>
 
-
-        {%if status %}
-        <div class="actions">
-          <!-- <a href="/user/{{ user_info.username }}" class="action">
-            <img class="actionIcon profileAction" src="../static/svg/profile.svg" alt="profile" />
-            <p class="action_title">Profile</p>
-          </a> -->
-          <a class="action" onclick='$("#modal-edit").addClass("is-active")'>
-            <img class="actionIcon profileAction" src="../static/svg/setting.svg" alt="profile" />
-            <p class="action_title" >Edit Profile</p>
-          </a>
-
-          <a class="action" onclick="sign_out()">
-            <img class="actionIcon profileAction" src="../static/svg/switch.svg" alt="profile" />
-            <p class="action_title" >Log Out</p>
-          </a>
         </div>
-        {%endif%}
-      </div>
+      </article>
     </div>
-  </nav>
+  </section>
 
   <div class="modal" id="modal-edit">
     <div class="modal-background" onclick='$("#modal-edit").removeClass("is-active")'></div>
@@ -146,8 +114,7 @@
     <button class="modal-close is-large" aria-label="close"
       onclick='$("#modal-edit").removeClass("is-active")'></button>
   </div>
-
-  <!-- {%if status %}
+  {%if status %}
   <nav id="btns-me" class="level is-mobile" style="margin-top: 2rem">
     <a class="button level-item has-text-centered is-sparta" aria-label="edit"
       onclick='$("#modal-edit").addClass("is-active")'>
@@ -158,17 +125,24 @@
       Sign Out&nbsp;&nbsp;&nbsp;<span class="icon is-small"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
     </a>
   </nav>
-  {%endif%} -->
+  {%endif%}
 
   {%if status%}
   <section class="section">
     <article class="media">
-      <!-- <figure class="media-left" style="align-self: center">
+      <figure class="media-left" style="align-self: center">
         <a class="image is-32x32" href="/user/{{ user_info.username }}">
           <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
         </a>
-      </figure> -->
-
+      </figure>
+      <div class="media-content">
+        <div class="field">
+          <p class="control">
+            <input id="input-post" class="input is-rounded" placeholder="What are you thinking about?"
+              onclick='$("#modal-post").addClass("is-active")' />
+          </p>
+        </div>
+      </div>
       <div class="modal" id="modal-post">
         <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
         <div class="modal-content">
@@ -176,9 +150,6 @@
             <article class="media">
               <div class="media-content">
                 <div class="field">
-                  <div class="mb-3">
-                    <input class="form-control" type="file" id="image" />
-                  </div>
                   <p class="control">
                     <textarea id="textarea-post" class="textarea" placeholder="What are you thinking about?"></textarea>
                   </p>
@@ -204,10 +175,10 @@
         <button class="modal-close is-large" aria-label="close"
           onclick='$("#modal-post").removeClass("is-active")'></button>
       </div>
-
     </article>
   </section>
   {%endif%}
+
   <section class="section">
     <div id="post-box" class="container">
       <div class="box">
@@ -244,6 +215,7 @@
   <script>
     $(document).ready(function () {
       get_posts("{{user_info.username}}")
+      // get_posts()
     });
   </script>
 </body>

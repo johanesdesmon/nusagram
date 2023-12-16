@@ -57,11 +57,12 @@ function get_posts(username) {
                                               <div class="media-content">
                                                   <div class="content">
                                                       <p>
-                                                          <strong>${post["profile_name"]}</strong> <small>@${post["username"]}</small> <small>${time_before}</small>
+                                                          <strong>${post["profile_name"]}</strong> <small>${time_before}</small>
                                                           <br>
                                                           <img class="is-rounded" src="../${post["foto"]}"
                                                           alt="Image">
-                                                          
+                                                          <small>@${post["username"]}</small>
+                                                          <br>
                                                           ${post["comment"]}
                                                       </p>
                                                   </div>

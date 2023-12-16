@@ -21,7 +21,7 @@ MONGODB_CONNECTION_STRING = (
     # "mongodb+srv://ncc1477:Qwedsa123!@cluster0.kkwb2cl.mongodb.net"
 )
 client = MongoClient(MONGODB_CONNECTION_STRING, tlsCAFile=ca)
-db = client.minigram
+db = client.sweeter
 
 
 @app.route("/")

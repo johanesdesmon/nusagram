@@ -64,12 +64,13 @@
         <div class="nav_icons profile">
           <!-- <img src="../static/images/profile_pic.jpg" alt="Profile Pic" /> -->
           <figure class="media-left" style="align-self: center">
-            <a class="image is-32x32">
+            <a href="/user/{{ user_info.username }}" class="image is-32x32">
               <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
             </a>
+            
           </figure>
-
-          <div class="actions">
+          <strong>{{ user_info.username }}</strong>
+          <!-- <div class="actions">
             <a href="/user/{{ user_info.username }}" class="action">
               <img class="actionIcon profileAction" src="../static/svg/profile.svg" alt="profile" />
               <p class="action_title" >Profile</p>
@@ -77,7 +78,8 @@
             <a class="action" onclick="sign_out()">
               <p class="action_title">Log Out</p>
             </a>
-          </div>
+          </div> -->
+
         </div>
     </div>
   </nav>
