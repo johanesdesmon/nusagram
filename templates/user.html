@@ -68,7 +68,7 @@
             <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
           </a>
         </figure>
-        <strong>{{ user_info.username }}</strong>
+        <small>{{ user_info.username }}</small>
 
 
         {%if status %}
@@ -78,14 +78,21 @@
             <p class="action_title">Profile</p>
           </a> -->
           <a class="action" onclick='$("#modal-edit").addClass("is-active")'>
-            <img class="actionIcon profileAction" src="../static/svg/setting.svg" alt="profile" />
+            <img class="actionIcon profileAction" src="../static/svg/setting.svg" alt="edit_profile" />
             <p class="action_title" >Edit Profile</p>
+          </a>
+          
+          <a class="action" href="/about">
+            <img class="actionIcon profileAction" src="../static/svg/three_dots.svg" alt="profile" />
+            <p class="action_title" >About</p>
           </a>
 
           <a class="action" onclick="sign_out()">
-            <img class="actionIcon profileAction" src="../static/svg/switch.svg" alt="profile" />
+            <img class="actionIcon profileAction" src="../static/svg/switch.svg" alt="logout" />
             <p class="action_title" >Log Out</p>
           </a>
+          
+
         </div>
         {%endif%}
       </div>

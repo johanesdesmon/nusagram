@@ -1,33 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
-    <meta property="og:title" content="Sweeter - the sweetest site" />
-    <meta property="og:description" content="mini project for Web Plus" />
-    <meta property="og:image" content="{{ url_for('static', filename='logo.png') }}" />
-    
-    <title>About</title>
 
-    <!-- Bulma CSS link -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-  </head>
-  <body>
-    <section class="hero is-large is-info">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">The About Page</h1>
-          <h2 class="subtitle">Halaman ini bisa diakses siapa saja</h2>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+  <meta property="og:title" content="Sweeter - the sweetest site" />
+  <meta property="og:description" content="mini project for Web Plus" />
+  <meta property="og:image" content="{{ url_for('static', filename='logo.png') }}" />
+
+  <title>About</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.css"
+    integrity="sha512-h1rwF0uB6r2IuEZcyjPrR53bBKN9Wb4yL+w3Rdlzmc3CkBF1gMSFvQIIstnu4bEtYDaKca5ke5S8UBAACRImyg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />\
+  
+    <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"
+    integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav_bar">
+      <a href="/" class="logo">
+        <img src="../static/logo_large.png" alt="Instsgram Logo" />
+      </a>
+    </div>
+    </div>
+  </nav>
+
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+          aria-expanded="true" aria-controls="collapseOne">
+          Accordion Item #1
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin
+          adds the appropriate classes that we use to style each element. These classes control the overall appearance,
+          as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or
+          overriding our default variables. It's also worth noting that just about any HTML can go within the
+          <code>.accordion-body</code>, though the transition does limit overflow.
         </div>
       </div>
-    </section>
-    
-  </body>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+          aria-expanded="false" aria-controls="collapseTwo">
+          Accordion Item #2
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin
+          adds the appropriate classes that we use to style each element. These classes control the overall appearance,
+          as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or
+          overriding our default variables. It's also worth noting that just about any HTML can go within the
+          <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Accordion Item #3
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin
+          adds the appropriate classes that we use to style each element. These classes control the overall appearance,
+          as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or
+          overriding our default variables. It's also worth noting that just about any HTML can go within the
+          <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Accordion Item #3
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin
+          adds the appropriate classes that we use to style each element. These classes control the overall appearance,
+          as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or
+          overriding our default variables. It's also worth noting that just about any HTML can go within the
+          <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
 </html>
