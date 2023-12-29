@@ -43,7 +43,8 @@
   <nav class="nav">
     <div class="nav_bar">
       <a href="/" class="logo">
-        <img src="../static/logo_large.png" alt="Instsgram Logo" />
+        <!-- <img src="../static/logo_large.png" alt="Instsgram Logo" /> -->
+        <strong class="is-sparta" style="font-family: 'Stylish', sans-serif; font-size: larger"> NUSAGRAM </strong>
       </a>
     </div>
 
@@ -82,9 +83,19 @@
             <p class="action_title" >Edit Profile</p>
           </a>
           
-          <a class="action" href="/about">
+          <!-- <a class="action" href="/about">
             <img class="actionIcon profileAction" src="../static/svg/three_dots.svg" alt="profile" />
             <p class="action_title" >About</p>
+          </a> -->
+
+          <a class="action" href="/feedback">
+            <img class="actionIcon profileAction" src="../static/svg/three_dots.svg" alt="profile" />
+            <p class="action_title" >Saran & Masukan</p>
+          </a>
+
+          <a class="action" href="/users/{{user_info.username}}">
+            <img class="actionIcon profileAction" src="../static/svg/message.svg" alt="profile" />
+            <p class="action_title" >Anonim Message</p>
           </a>
 
           <a class="action" onclick="sign_out()">
@@ -183,9 +194,7 @@
             <article class="media">
               <div class="media-content">
                 <div class="field">
-                  <div class="mb-3">
-                    <input class="form-control" type="file" id="image" />
-                  </div>
+                  <input class="form-control" type="file" id="image"  />
                   <p class="control">
                     <textarea id="textarea-post" class="textarea" placeholder="What are you thinking about?"></textarea>
                   </p>
@@ -215,6 +224,7 @@
     </article>
   </section>
   {%endif%}
+  
   <section class="section">
     <div id="post-box" class="container">
       <div class="box">

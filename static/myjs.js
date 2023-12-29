@@ -81,18 +81,78 @@ function get_posts(username) {
                                                           <span class="like-num">${num2str(post["count_star"])}</span>
                                                         </a>
 
-                                                        <a class="level-item is-sparta" aria-label="thumbsup" onclick="toggle_thumbsup('${post["_id"]}', 'thumbsup')">
-                                                        <span class="icon is-small"><i class="fa ${class_thumbsup}" aria-hidden="true"></i></span>
-                                                        &nbsp;
-                                                        <span class="like-num">${num2str(post["count_thumbsup"])}</span>
-                                                      </a>
-
                                                       </div>
   
                                                   </nav>
                                               </div>
                                           </article>
                                       </div>`;
+                    let html_temp2 = 
+                    `
+                                    <div class="post_user_detail">
+                                    <div class="user_detail">
+                                    <div class="profile_pic pending">
+                                    <a class="image is-64x64" href="/user/${post["username"]}">
+                                    <img class="is-rounded" src="/static/${post["profile_pic_real"]}"
+                                         alt="Image">
+                                </a>
+                                    </div>
+                                    <p class="status_username">${post["username"]}</p>
+                                    </div>
+                                    <a href="#" class="menuIcon">
+                                    <img src="../static/svg/three_dots.svg" alt="menu" />
+                                    </a>
+                                </div>
+                        
+                                <div class="post_content">
+                                    <img src="${post["foto"]}" alt="post1" />
+                                </div>
+                        
+                                <div class="post_description">
+                                    <!-- POST INTERACTIONS -->
+                                    <div class="post_interactions">
+                                    <div class="interactions">
+
+                                    <nav class="level is-mobile">
+                                        <div class="level-left">
+
+                                            <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${post["_id"]}', 'heart')">
+                                            <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true"></i></span>
+                                            &nbsp;
+                                            <span class="like-num">${num2str(post["count_heart"])}</span>
+                                            </a>
+                                            &nbsp;
+                                            &nbsp;
+                                            <a class="level-item is-sparta" aria-label="star" onclick="toggle_star('${post["_id"]}', 'star')">
+                                            <span class="icon is-small"><i class="fa ${class_star}" aria-hidden="true"></i></span>
+                                            &nbsp;
+                                            <span class="like-num">${num2str(post["count_star"])}</span>
+                                        </a>
+
+                                        </div>
+
+                                    </nav>
+                                </div>
+                                    <div class="interaction_icons saveIcon">
+                                        <img src="../static/svg/saved.svg" alt="save" />
+                                    </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- POST DESCRIPTION -->
+                                <div class="description">
+                                    <p class="likes">${num2str(post["count_heart"])} likes</p>
+                                    <div>
+                                    <a class="textusername" href="/user/${post["username"]}">${post["username"]}</a>
+                                    <p>
+                                    ${post["comment"]}
+                                    </p>
+                                    </div>
+                                    <a href="#" class="view_all_comments">View all 27 comments</a>
+                                    <div class="time">${time_before}</div>
+                                </div>
+                                </div>
+                                    `;
                     $("#post-box").append(html_temp);
                 }
             }
@@ -130,6 +190,7 @@ function num2str(count) {
     }
     return count
 }
+
 
 function toggle_like(post_id, type) {
     console.log(post_id, type);
