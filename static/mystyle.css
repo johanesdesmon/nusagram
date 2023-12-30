@@ -1,3 +1,27 @@
+.inicomment {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  /* Sesuaikan dengan kebutuhan padding Anda */
+  resize: none;
+  /* Menonaktifkan fitur resize bawaan */
+  overflow-y: hidden;
+  /* Menonaktifkan scroll vertikal saat textarea memperluas */
+}
+
+.buttoncomment {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
 
 
 /*banner css */
@@ -91,23 +115,6 @@ input::-webkit-calendar-picker-indicator {
 
 .logo img {
   width: 100%;
-}
-
-.search_bar {
-  display: flex;
-  align-items: center;
-  margin: 0 5px;
-}
-
-.search_bar #search {
-  padding: 10px;
-  border: none;
-  background: rgb(239, 239, 239);
-  border-radius: 10px;
-  width: auto;
-  font-size: 0.9rem;
-  font-weight: 300;
-  padding-left: 15px;
 }
 
 .nav_items {

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instagram</title>
+  <title>Nusagram</title>
   <!-- <link rel="stylesheet" href="../static/home.css" /> -->
   <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" />
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  <div id="user-profile" data-profile="{{user_info.profile_pic_real}}"></div>
+  <div id="user-profile" data-profile="{{user_info.username}}"></div>
 
   <nav class="nav">
     <div class="sidebar">
@@ -122,55 +122,9 @@
 
       <!-- POST 1 -->
       <div class="post" id="post-box">
-        <div class="post_user_detail">
-          <div class="user_detail">
-            <div class="profile_pic pending">
-              <img src="../static/images/pic_10.jpg" alt="pic_10" />
-            </div>
-            <p class="status_username">professer_x</p>
-          </div>
-          <a href="#" class="menuIcon">
-            <img src="../static/svg/three_dots.svg" alt="menu" />
-          </a>
-        </div>
-
-        <div class="post_content">
-          <img src="../static/images/pic_10.jpg" alt="post1" />
-        </div>
-
-        <div class="post_description">
-          <!-- POST INTERACTIONS -->
-          <div class="post_interactions">
-            <div class="interactions">
-              <div class="interaction_icons likeIcon">
-                <img src="../static/svg/heart.svg" alt="Like" />
-              </div>
-              <div class="interaction_icons commentIcon">
-                <img src="../static/svg/comment.svg" alt="Comment" />
-              </div>
-              <div class="interaction_icons shareIcon">
-                <img src="../static/svg/share.svg" alt="Share" />
-              </div>
-            </div>
-            <div class="interaction_icons saveIcon">
-              <img src="../static/svg/saved.svg" alt="save" />
-            </div>
-          </div>
-        </div>
-
-        <!-- POST DESCRIPTION -->
-        <div class="description">
-          <p class="likes">12,223 likes</p>
-          <div class="des">
-            <p class="status_username">professer_x</p>
-            <p class="desText">
-              Be thankful for what you have. What’s your thought?
-            </p>
-          </div>
-          <a href="#" class="view_all_comments">View all 27 comments</a>
-          <div class="time">2 DAYS AGO</div>
-        </div>
+        <!-- disi js -->
       </div>
+
     </div>
 
     <!-- RIGHT SIDE -->
@@ -197,15 +151,7 @@
       </div>
 
       <div class="other_people" id="other_people">
-        <div class="profile_details">
-          <div class="profile_pic_suggested">
-            <img src="../static/images/pic_2.jpg" alt="pic_2" />
-          </div>
-          <div class="more_details">
-            <p class="username">skullcrusher</p>
-            <p class="name">Follows You</p>
-          </div>
-        </div>
+        <!-- disi js -->
         <div class="switch_link">
           <a href="#">Follow</a>
         </div>

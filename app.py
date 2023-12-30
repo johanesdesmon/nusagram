@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import certifi
 
+
 ca = certifi.where()
 
 
@@ -21,7 +22,7 @@ MONGODB_CONNECTION_STRING = (
     "mongodb+srv://ncc1477:Qwedsa123!@cluster0.kkwb2cl.mongodb.net"
 )
 client = MongoClient(MONGODB_CONNECTION_STRING, tlsCAFile=ca)
-db = client.minigramv2
+db = client.nusagram
 
 
 @app.route("/")
@@ -308,15 +309,7 @@ def get_anonmsg():
 
     for msg in anonmsg:
             msg["_id"] = str(msg["_id"])
-            msg["count_heart"] = db.likes_anon.count_documents(
-                {"post_id": msg["_id"], "type": "heart"}
-            )
             
-            msg["heart_by_me"] = bool(
-                db.likes_anon.find_one(
-                    {"post_id": msg["_id"], "type": "heart"}
-                )
-            )
     return jsonify(
             {
                 "result": "success",
@@ -412,13 +405,69 @@ def bucket_get():
     bucket_list = list(db.bucket.find({},{'_id' : False}))
     return jsonify({'buckets': bucket_list})
 
+@app.route("/add_comment_post", methods=["POST"])
+def add_comment_post():
+    post_id_receive = request.form["post_id_give"]
+    username_receive = request.form["username_give"]
+    comment_receive = request.form["comment_give"]
+    date_receive = request.form["date_give"]
 
-@app.route('/submitcomment', methods=['POST'])
-def submitcomment():
-    comment = request.form.get('comment')
-    # Proses komentar di sini, seperti menyimpan ke database
-    # return render_template('index.html', comment=comment)
-    print (comment)
+    doc = {
+        "post_id": post_id_receive,
+        "username": username_receive,
+        "comment": comment_receive,
+        "date": date_receive,
+       }
+
+    db.comments_posts.insert_one(doc)
+    return jsonify({"result": "success", "msg": "Comment added successfully!"})
+
+@app.route("/get_comments_post", methods=["GET"])
+def get_comments_post():
+    post_id_receive = request.args.get("post_id_give")
+    print (post_id_receive)
+
+    # Ambil komentar-komentar dari database berdasarkan post_id
+    comments = list(db.comments_posts.find({"post_id": post_id_receive}))
+
+    for comment in comments:
+        # Optional: Modifikasi data komentar jika diperlukan sebelum dikirim ke klien
+        comment["_id"] = str(comment["_id"])  # Ubah ObjectId menjadi string, jika diperlukan
+
+    return jsonify({"result": "success", "comments": comments})
+
+
+
+@app.route("/add_comment", methods=["POST"])
+def add_comment():
+    post_id_receive = request.form["post_id_give"]
+    comment_receive = request.form["comment_give"]
+    date_receive = request.form["date_give"]
+
+    doc = {
+        "post_id": post_id_receive,
+        "comment": comment_receive,
+        "date": date_receive,
+       }
+
+    db.comments.insert_one(doc)
+    return jsonify({"result": "success", "msg": "Comment added successfully!"})
+
+
+@app.route("/get_comments", methods=["GET"])
+def get_comments():
+    post_id_receive = request.args.get("post_id_give")
+    print (post_id_receive)
+
+    # Ambil komentar-komentar dari database berdasarkan post_id
+    comments = list(db.comments.find({"post_id": post_id_receive}))
+
+    for comment in comments:
+        # Optional: Modifikasi data komentar jika diperlukan sebelum dikirim ke klien
+        comment["_id"] = str(comment["_id"])  # Ubah ObjectId menjadi string, jika diperlukan
+
+    return jsonify({"result": "success", "comments": comments})
+
 
 if __name__ == "__main__":
     app.run("0.0.0.0", port=5000, debug=True)

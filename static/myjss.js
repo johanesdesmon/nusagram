@@ -1,3 +1,178 @@
+
+function displayComments(postId) {
+    console.log(postId);
+    $.ajax({
+        type: "GET",
+        url: `/get_comments?post_id_give=${postId}`,
+        success: function (response) {
+            if (response["result"] === "success") {
+                let comments = response["comments"];
+                console.log(comments);
+
+                // Clear existing comments
+
+                // Display new comments
+                for (let i = 0; i < comments.length; i++) {
+                    let comment = comments[i];
+                    let time_post = new Date(comment["date"]);
+                    let time_before = time2str(time_post);
+                    
+
+                    let html = `
+                    <div class="comment">
+                        &nbsp;
+                        <p>
+                        <small>${time_before}</small>
+                        <br>
+                        ${comment["comment"]}
+                        </>
+                    </div>
+                `;
+        
+                $(`#${postId}`).append(html);
+                }
+            } else {
+                alert(response.msg);
+            }
+        },
+    });
+}
+
+
+function addComment(post_Id, commentText) {
+    console.log(post_Id);
+    console.log(commentText);
+
+    let today = new Date().toISOString()
+    let form_data = new FormData();
+
+    form_data.append('post_id_give', post_Id);
+    form_data.append('comment_give', commentText);
+    form_data.append('date_give', today);
+
+    $.ajax({
+        type: "POST",
+        url: "/add_comment",
+        data: form_data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.result === "success") {
+                alert(response.msg);
+                window.location.reload() // Refresh comments after adding one
+            } else {
+                alert(response.msg);
+            }
+        },
+    });
+}
+
+function submitComment(post_id,comment_text) {
+    let postId = post_id;
+    let commentText = comment_text;
+    console.log(postId);
+    console.log(commentText);
+
+    // Periksa apakah postId dan commentText kosong
+    if (!commentText) {
+        alert("comment text cannot be empty.");
+        return;
+    }
+
+    addComment(postId, commentText);
+}
+
+
+function displayComments_post(postId) {
+    console.log(postId);
+    $.ajax({
+        type: "GET",
+        url: `/get_comments_post?post_id_give=${postId}`,
+        success: function (response) {
+            if (response["result"] === "success") {
+                let comments = response["comments"];
+                console.log(comments);
+
+                // Clear existing comments
+
+                // Display new comments
+                for (let i = 0; i < comments.length; i++) {
+                    let comment = comments[i];
+                    let time_post = new Date(comment["date"]);
+                    let time_before = time2str(time_post);
+                    
+
+                    let html = `
+                    <div class="comment">
+                        &nbsp;
+                        <p>
+                        <small>${time_before}</small>
+                        <br>
+                        ${comment["username"]} >>>
+                        ${comment["comment"]}
+                        </>
+                    </div>
+                `;
+        
+                $(`#${postId}`).append(html);
+                }
+            } else {
+                alert(response.msg);
+            }
+        },
+    });
+}
+
+
+function addCommentpost(post_Id, commentText, usernamepostt) {
+    console.log(post_Id);
+    console.log(commentText);
+    console.log(usernamepostt);
+
+    let today = new Date().toISOString()
+    let form_data = new FormData();
+
+    form_data.append('post_id_give', post_Id);
+    form_data.append('username_give', usernamepostt);
+    form_data.append('comment_give', commentText);
+    form_data.append('date_give', today);
+
+    $.ajax({
+        type: "POST",
+        url: "/add_comment_post",
+        data: form_data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.result === "success") {
+                alert(response.msg);
+
+                window.location.reload() // Refresh comments after adding one
+            } else {
+                alert(response.msg);
+            }
+        },
+    });
+}
+
+
+function submitCommentpost(post_id,comment_text, usernamepost) {
+    let postId = post_id;
+    let commentText = comment_text;
+    let usernamepostloh = usernamepost;
+    console.log(postId);
+    console.log(commentText);
+    console.log(usernamepost);
+
+    // Periksa apakah postId dan commentText kosong
+    if (!commentText) {
+        alert("comment text cannot be empty.");
+        return;
+    }
+
+    addCommentpost(postId, commentText, usernamepostloh);
+}
+
 function displaySelectedFile() {
     const fileInput = document.getElementById('fileInput');
     const selectedImage = document.getElementById('selectedImage');
@@ -91,25 +266,32 @@ function get_anonmsg(username) {
                     let html_temp1 = `
                     <div class="box">
                     <article class="media">
+ 
                         <div class="media-content">
                             <div class="content">
                                 <p>
-                                    <small>${time_before}</small>,
+                                    <small>${time_before}</small>
                                     <br />
-                                    ${msg["comment"]}
+                                    ${msg["comment"] }
                                 </p>
                             </div>
-                            <nav class="level is-mobile">
-                            <div class="level-left">
-
+        
+                            <!-- Comments section -->
+                            <div id=${msg["_id"]}>
+                                <!-- Comments will be dynamically added here -->
                             </div>
-
-                        </nav>
+                            
+                            <!-- Input area for adding comments -->
+                            <div class="inicomment">
+                            <textarea class="input" id="comment_text_${msg["_id"]}" cols="30" rows="10" placeholder="Add a comment"></textarea>
+                            <button class="buttoncomment" onclick="submitComment('${msg["_id"]}', $('#comment_text_${msg["_id"]}').val())">Submit</button>                            
+                            </div>
                         </div>
                     </article>
                 </div>
                     `
                     $("#post-box").append(html_temp1);
+                    displayComments(`${msg["_id"]}`);
 
                 }
             }
@@ -171,7 +353,6 @@ function get_profile() {
 function get_posts(username) {
     var userProfileElement = document.getElementById('user-profile');
     var userProfile = userProfileElement.getAttribute('data-profile');
-    console.log(userProfile);
     // code untuk menapilkan post by user
     if (username === undefined) {
         username = '';
@@ -216,26 +397,7 @@ function get_posts(username) {
                                     <!-- POST INTERACTIONS -->
                                     <div class="post_interactions">
                                     <div class="interactions">
-
-                                <nav class="level is-mobile">
-                                    <div class="level-left">
-
-                                        <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${post["_id"]}', 'heart')">
-                                          <span class="icon is-small"><i class="fa ${class_heart}" aria-hidden="true"></i></span>
-                                          &nbsp;
-                                          <span class="like-num">${num2str(post["count_heart"])}</span>
-                                        </a>
-                                        &nbsp;
-                                        &nbsp;
-                                        <a class="level-item is-sparta" aria-label="star" onclick="toggle_star('${post["_id"]}', 'star')">
-                                        <span class="icon is-small"><i class="fa ${class_star}" aria-hidden="true"></i></span>
-                                        &nbsp;
-                                        <span class="like-num">${num2str(post["count_star"])}</span>
-                                      </a>
-
-                                    </div>
-
-                                </nav>
+                                    <p>${num2str(post["count_heart"])} likes</p> &nbsp; <p> ${num2str(post["count_star"])} star</p>
                                     </div>
                                     <div class="interaction_icons saveIcon">
                                         <img src="../static/svg/saved.svg" alt="save" />
@@ -251,13 +413,27 @@ function get_posts(username) {
                                     ${post["comment"]}
                                     </p>
                                     </div>
-                                    <a href="#" class="view_all_comments">View all 27 comments</a>
+
+                                    <!-- Comments section -->
+                                    <div id=${post["_id"]}>
+                                        <!-- Comments will be dynamically added here -->
+                                    </div>
+
+
+                                    <!--<a href="#" class="view_all_comments">View all 27 comments</a>-->
+
+                                    <div class="inicomment">
+                                    <textarea class="input" id="comment_text_${post["_id"]}" cols="30" rows="10" placeholder="Add a comment"></textarea>
+                                    <button class="buttoncomment" onclick="submitCommentpost('${post["_id"]}', $('#comment_text_${post["_id"]}').val(), '${userProfile}') ">Submit</button>                                                   
+                                    </div>
                                     <div class="time">${time_before}</div>
                                 </div>
                                 </div>
                                     `;
 
                     $("#post-box").append(html_temp);
+                    displayComments_post(`${post["_id"]}`);
+
                 }
             }
         },
